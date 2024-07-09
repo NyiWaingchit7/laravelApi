@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,16 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+});
+
+Route::group(['prefix'=>'brand'],function($router){
+    Route::controller(BrandController::class)->group(function(){
+        Route::get('index','index');
+        Route::get('index/{id}','detail');
+        Route::post('create','store');
+        Route::put('update/{id}','update_brand');
+        Route::delete('delete/{id}','delete_brand');
+
+    });
 });
