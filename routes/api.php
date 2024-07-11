@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,15 @@ Route::group(['prefix'=>'brand'],function($router){
         Route::put('update/{id}','update_brand');
         Route::delete('delete/{id}','delete_brand');
 
+    });
+});
+
+Route::group(['prefix'=>'category'],function($router){
+    Route::controller(CategoryController::class)->group(function(){
+        Route::get('index','index');
+        Route::get('index/{id}','detail');
+        Route::post('create','store');
+        Route::post('update/{id}','update_category');
+        Route::delete('delete/{id}','delete_category');
     });
 });

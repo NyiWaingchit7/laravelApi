@@ -37,9 +37,9 @@ public function update_brand($id,Request $request){
         $exist = Brand::find($id);
         if(!$exist) return response()->json(['message' => 'there is no brand']);
         $this->validation($request);
-        $exist->update($request->all());
-        $data = $exist->refresh();
-        return response()->json(['data'=>$data], 200);
+        $exist->name = $request->name;
+        $exist->save();
+        return response()->json(['data'=>$exist], 200);
     }catch(Exception $e){
         return response()->json($e,500);
     }
