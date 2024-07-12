@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
@@ -68,6 +69,19 @@ Route::group(['prefix'=>'product'],function($router){
         Route::post('create','store');
         Route::post('update/{id}','update_product');
         Route::delete('delete/{id}','delete_product');
+
+    });
+});
+
+Route::group(['prefix'=>'order'],function($router){
+    Route::controller(OrderController::class)->group(function(){
+        Route::get('index','index');
+        Route::get('index/{id}','detail');
+        Route::post('create','store');
+        Route::get('get_order_items/{id}','get_order_items');
+        Route::get('get_user_orders/{id}','get_user_orders');
+        Route::post('change_status/{id}','change_status');
+
 
     });
 });

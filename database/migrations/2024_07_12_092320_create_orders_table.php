@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->enum('status',['Pending','Deliverd','Out for Delivery','Cancel','Accepted']);
-            $table->integer('total_price',12,2);
-            $table->string('date_of_delievery');
+            $table->double('total_price',12,2);
+            $table->string('date_of_delivery');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->timestamps();
