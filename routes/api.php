@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +49,25 @@ Route::group(['prefix'=>'category'],function($router){
         Route::post('create','store');
         Route::post('update/{id}','update_category');
         Route::delete('delete/{id}','delete_category');
+    });
+});
+
+Route::group(['prefix'=>'location'],function($router){
+    Route::controller(LocationController::class)->group(function(){
+
+        Route::post('create','store');
+        Route::put('update/{id}','update_location');
+        Route::delete('delete/{id}','delete_location');
+    });
+});
+
+Route::group(['prefix'=>'product'],function($router){
+    Route::controller(ProductController::class)->group(function(){
+        Route::get('index','index');
+        Route::get('index/{id}','detail');
+        Route::post('create','store');
+        Route::post('update/{id}','update_product');
+        Route::delete('delete/{id}','delete_product');
+
     });
 });
