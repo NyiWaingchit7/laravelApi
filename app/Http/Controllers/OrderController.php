@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Location;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -41,10 +42,10 @@ class OrderController extends Controller
     public function store(Request $request){
         try{
             $this->validation($request);
-            $location = Location::where('user_id',1)->first();
+            $location = Location::where('user_id',Auth::id())->first();
             $order = new Order();
             $order->location_id = $location->id;
-            $order->user_id = 1;
+            $order->user_id = Auth::id();
             $order->total_price = $request->total_price;
             $order->date_of_delivery = $request->date_of_delivery;
             $order->save();

@@ -17,7 +17,7 @@ try{
         'area'=> $request->area,
         'street'=>$request->street,
         'building'=>$request->building,
-        'user_id'=>1
+        'user_id'=>Auth::id()
     ]);
     return response()->json($data, 200);
         }catch(Exception $e){
